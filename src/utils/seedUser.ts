@@ -4,10 +4,17 @@ import bcrypt from 'bcryptjs';
 
 const DEFAULT_USERS = [
     {
-        nombre: 'Administrador',
-        apellido: 'GeoTracker',
-        email: 'admin@geotracker.com',
+        nombre: 'Carlos',
+        apellido: 'Ramírez',
+        email: 'carlos.admin@censos.gob',
         usuario: 'admin',
+        contrasena: 'admin123',
+    },
+    {
+        nombre: 'Elvis',
+        apellido: 'Chang',
+        email: 'elvis.admin@censos.gob',
+        usuario: 'admin_elvis',
         contrasena: 'admin123',
     },
     {
@@ -18,11 +25,66 @@ const DEFAULT_USERS = [
         contrasena: '123456',
     },
     {
+        nombre: 'Sofía',
+        apellido: 'Morales',
+        email: 'sofia.admin@censos.gob',
+        usuario: 'admin_sofia',
+        contrasena: 'admin123',
+    },
+    {
+        nombre: 'Fernando',
+        apellido: 'López',
+        email: 'fernando.admin@censos.gob',
+        usuario: 'admin_fernando',
+        contrasena: 'admin123',
+    },
+    {
+        nombre: 'Valeria',
+        apellido: 'Gómez',
+        email: 'valeria.admin@censos.gob',
+        usuario: 'admin_valeria',
+        contrasena: 'admin123',
+    },
+    {
+        nombre: 'Miguel Ángel',
+        apellido: 'Castillo',
+        email: 'miguel.admin@censos.gob',
+        usuario: 'admin_miguel',
+        contrasena: 'admin123',
+    },
+    {
         nombre: 'Estudiante',
         apellido: 'UDV',
         email: 'estudiante@geotracker.com',
         usuario: 'estudiante',
         contrasena: '123456',
+    }
+];
+
+const SAMPLE_LOCATIONS = [
+    {
+        nombre: 'Universidad Da Vinci de Guatemala',
+        descripcion: 'Sede central universitaria - Campus de estudios de ingeniería',
+        latitud: 14.603816,
+        longitud: -90.513275,
+    },
+    {
+        nombre: 'Plaza de la Constitución',
+        descripcion: 'Parque Central y Palacio Nacional de la Cultura, Zona 1',
+        latitud: 14.641656,
+        longitud: -90.513271,
+    },
+    {
+        nombre: 'Paseo Cayalá',
+        descripcion: 'Centro urbano y comercial con áreas verdes, Zona 16',
+        latitud: 14.611942,
+        longitud: -90.485292,
+    },
+    {
+        nombre: 'Mirador Carretera a El Salvador',
+        descripcion: 'Vista panorámica del valle de la Ciudad de Guatemala',
+        latitud: 14.569420,
+        longitud: -90.478912,
     }
 ];
 
@@ -44,41 +106,21 @@ export const seedInitialData = async () => {
                     usuario: userData.usuario,
                     contrasena: hashedPassword,
                 });
-                console.log(`✅ Usuario creado para pruebas: ${userData.usuario} (contraseña: ${userData.contrasena})`);
+                console.log(`✅ Usuario creado: ${userData.usuario} (${userData.email}) - Pass: ${userData.contrasena}`);
             }
 
-            // Si es el usuario admin y no tiene ubicaciones, agregar ubicaciones de ejemplo para pruebas en Android
-            if (user.usuario === 'admin' || user.usuario === 'elvis') {
-                const count = await Ubicacion.count({ where: { usuarioId: user.id } });
-                if (count === 0) {
-                    await Ubicacion.bulkCreate([
-                        {
-                            nombre: 'Universidad Da Vinci de Guatemala',
-                            descripcion: 'Sede central universitaria - Campus de estudios de ingeniería',
-                            latitud: 14.603816,
-                            longitud: -90.513275,
-                            usuarioId: user.id,
-                        },
-                        {
-                            nombre: 'Plaza de la Constitución',
-                            descripcion: 'Parque Central y Palacio Nacional de la Cultura, Zona 1',
-                            latitud: 14.641656,
-                            longitud: -90.513271,
-                            usuarioId: user.id,
-                        },
-                        {
-                            nombre: 'Paseo Cayalá',
-                            descripcion: 'Centro urbano y comercial con áreas verdes, Zona 16',
-                            latitud: 14.611942,
-                            longitud: -90.485292,
-                            usuarioId: user.id,
-                        }
-                    ]);
-                    console.log(`📍 3 ubicaciones de prueba creadas para el usuario: ${user.usuario}`);
-                }
+            // Asignar ubicaciones de prueba a los usuarios principales para visualización inmediata en Android
+            const count = await Ubicacion.count({ where: { usuarioId: user.id } });
+            if (count === 0) {
+                const ubicacionesParaUsuario = SAMPLE_LOCATIONS.map(loc => ({
+                    ...loc,
+                    usuarioId: user.id,
+                }));
+                await Ubicacion.bulkCreate(ubicacionesParaUsuario);
+                console.log(`📍 4 ubicaciones de prueba asignadas al usuario: ${user.usuario}`);
             }
         }
-        console.log('✅ Verificación y carga de datos iniciales completada.');
+        console.log('✅ Verificación y carga de los 8 usuarios y ubicaciones completada.');
     } catch (error: any) {
         console.error('⚠️ Error al sembrar datos iniciales:', error.message);
     }

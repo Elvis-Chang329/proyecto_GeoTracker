@@ -48,15 +48,22 @@ El servidor estará escuchando en el puerto `3000`.
 
 ---
 
-## 👤 Usuarios de Prueba Pre-cargados
+## 👤 Usuarios Disponibles para Pruebas
 
-Al iniciar el servidor, se crean automáticamente los siguientes usuarios con ubicaciones de prueba:
+Al iniciar el servidor, se cargan automáticamente los **8 usuarios** que se han venido trabajando (incluyendo los 6 administradores originales de clase):
 
-| Usuario | Contraseña | Email | Rol |
+| Nombre y Apellido | Usuario | Contraseña | Correo Electrónico |
 |---|---|---|---|
-| `admin` | `admin123` | `admin@geotracker.com` | Administrador / Usuario |
-| `elvis` | `123456` | `elvis@geotracker.com` | Estudiante / Usuario |
-| `estudiante` | `123456` | `estudiante@geotracker.com` | Estudiante / Usuario |
+| Carlos Ramírez | `admin` | `admin123` | `carlos.admin@censos.gob` |
+| Elvis Chang | `admin_elvis` | `admin123` | `elvis.admin@censos.gob` |
+| Elvis Chang | `elvis` | `123456` | `elvis@geotracker.com` |
+| Sofía Morales | `admin_sofia` | `admin123` | `sofia.admin@censos.gob` |
+| Fernando López | `admin_fernando` | `admin123` | `fernando.admin@censos.gob` |
+| Valeria Gómez | `admin_valeria` | `admin123` | `valeria.admin@censos.gob` |
+| Miguel Ángel Castillo | `admin_miguel` | `admin123` | `miguel.admin@censos.gob` |
+| Estudiante UDV | `estudiante` | `123456` | `estudiante@geotracker.com` |
+
+> *Nota: Puedes iniciar sesión usando tanto el **nombre de usuario** como el **correo electrónico**.*
 
 ---
 
