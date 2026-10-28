@@ -1,34 +1,37 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../config/database';
 
-interface UserAttributes {
+export interface UserAttributes {
     id: number;
     nombre: string;
-    apellido: string;
+    apellido?: string;
     email: string;
     usuario: string;
     contrasena: string;
-    edad: number;
-    fechaNacimiento: string;
-    telefono: string;
-    rol: string; // 'censista' o 'administrador'
+    edad?: number | null;
+    fechaNacimiento?: string | null;
+    telefono?: string | null;
+    rol?: string;
     foto?: string | null;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'rol'> { }
+export interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'apellido' | 'edad' | 'fechaNacimiento' | 'telefono' | 'rol' | 'foto'> { }
 
 class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
     declare id: number;
     declare nombre: string;
-    declare apellido: string;
+    declare apellido?: string;
     declare email: string;
     declare usuario: string;
     declare contrasena: string;
-    declare edad: number;
-    declare fechaNacimiento: string;
-    declare telefono: string;
-    declare rol: string;
+    declare edad?: number | null;
+    declare fechaNacimiento?: string | null;
+    declare telefono?: string | null;
+    declare rol?: string;
     declare foto?: string | null;
+
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 User.init(
@@ -44,7 +47,8 @@ User.init(
         },
         apellido: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
+            defaultValue: '',
         },
         email: {
             type: DataTypes.STRING,
@@ -62,26 +66,24 @@ User.init(
         },
         edad: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         fechaNacimiento: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
+            allowNull: true,
         },
         telefono: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
+            defaultValue: '',
         },
         rol: {
             type: DataTypes.STRING(20),
-            allowNull: false,
-            defaultValue: 'censista',
-            validate: {
-                isIn: [['censista', 'administrador']]
-            }
+            allowNull: true,
+            defaultValue: 'user',
         },
         foto: {
-            type: DataTypes.TEXT, // Soporta Base64 para la foto de la cámara/galería
+            type: DataTypes.TEXT,
             allowNull: true,
         },
     },

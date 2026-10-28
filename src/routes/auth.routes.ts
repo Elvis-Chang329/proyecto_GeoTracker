@@ -1,31 +1,18 @@
 import { Router } from 'express';
-import multer from 'multer';
-import { register, login } from '../controllers/auth.controller';
-import { getUserById, getUserPhoto, getUserPhotoRaw, uploadUserPhoto, deleteUserPhoto } from '../controllers/user.controller';
-
-const upload = multer({
-    storage: multer.memoryStorage(),
-    limits: { fileSize: 50 * 1024 * 1024 } // 50MB
-});
+import { register, login, getProfile } from '../controllers/auth.controller';
+import { authenticateToken } from '../middleware/auth.middleware';
 
 const router = Router();
 
-router.post('/', register);
-router.post('/register', register);
+// Endpoint de Login (Punto 1 del proyecto)
+// Recibe: usuario/email y contrasena -> Retorna Token JWT
 router.post('/login', login);
 
-// Rutas complementarias para compatibilidad con la app móvil
-router.get('/user/:id', getUserById);
-router.get('/:id', getUserById);
-router.post('/:id/foto', upload.any(), uploadUserPhoto);
-router.put('/:id/foto', upload.any(), uploadUserPhoto);
-router.post('/:id/photo', upload.any(), uploadUserPhoto);
-router.put('/:id/photo', upload.any(), uploadUserPhoto);
-router.get('/:id/foto', getUserPhoto);
-router.get('/:id/photo', getUserPhoto);
-router.get('/:id/foto/raw', getUserPhotoRaw);
-router.get('/:id/photo/raw', getUserPhotoRaw);
-router.delete('/:id/foto', deleteUserPhoto);
-router.delete('/:id/photo', deleteUserPhoto);
+// Endpoint de Registro de usuarios
+router.post('/register', register);
+router.post('/', register);
+
+// Endpoint para validar el token y obtener datos del usuario actual
+router.get('/me', authenticateToken, getProfile);
 
 export default router;
