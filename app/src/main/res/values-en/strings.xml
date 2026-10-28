@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GeoTracker</string>
+    <string name="login_title">Sign In</string>
+    <string name="login_subtitle">Enter your credentials to continue</string>
+    <string name="label_email_user">Email / Username</string>
+    <string name="label_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_logout">Log Out</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_accept">Accept</string>
+</resources>

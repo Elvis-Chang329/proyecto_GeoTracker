@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Borde Exterior Escudo Dorado UDV -->
+    <path
+        android:fillColor="#C5A059"
+        android:pathData="M24,20 L84,20 C84,20 84,65 54,88 C24,65 24,20 24,20 Z" />
+
+    <!-- Fondo Interno Azul Noche UDV -->
+    <path
+        android:fillColor="#0C1D42"
+        android:pathData="M27,23 L81,23 C81,23 81,63 54,84 C27,63 27,23 27,23 Z" />
+
+    <!-- Cruz Dorada Central Dividiendo los 4 Cuadrantes -->
+    <path
+        android:fillColor="#C5A059"
+        android:pathData="M52,23 H56 V82 H52 Z" />
+    <path
+        android:fillColor="#C5A059"
+        android:pathData="M27,51 H81 V55 H27 Z" />
+
+    <!-- Cuadrante 1 (Blanco): Mundo / Átomo UDV -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M31,27 H48 V47 H31 Z" />
+    <path
+        android:fillColor="#0C1D42"
+        android:pathData="M39.5,37m-6,0a6,6 0 1,1 12,0a6,6 0 1,1 -12,0" />
+
+    <!-- Cuadrante 2 (Azul): Red Global -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M59,37m-7,0a7,7 0 1,1 14,0a7,7 0 1,1 -14,0" />
+
+    <!-- Cuadrante 3 (Blanco): Paloma y Montañas -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M31,59 H48 V75 H31 Z" />
+    <path
+        android:fillColor="#0C1D42"
+        android:pathData="M33,72 L38,65 L43,72 Z" />
+
+    <!-- Cuadrante 4 (Blanco): Hombre de Vitruvio / Da Vinci -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M59,59 H77 V75 H59 Z" />
+    <path
+        android:fillColor="#0C1D42"
+        android:pathData="M68,62m-2,0a2,2 0 1,1 4,0a2,2 0 1,1 -4,0" />
+
+</vector>
