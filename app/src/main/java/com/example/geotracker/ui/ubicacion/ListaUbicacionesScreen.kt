@@ -43,16 +43,25 @@ fun ListaUbicacionesScreen(
             ) {
                 Text(
                     text = "Listado de Ubicaciones",
-                    style = MaterialTheme.typography.headlineMedium,
+                    style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.weight(1f)
                 )
-                TextButton(onClick = onVolverClick) {
-                    Text("Volver")
+                OutlinedButton(
+                    onClick = onVolverClick,
+                    shape = RoundedCornerShape(10.dp),
+                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "Volver",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp
+                    )
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             if (state.cargando) {
                 Box(

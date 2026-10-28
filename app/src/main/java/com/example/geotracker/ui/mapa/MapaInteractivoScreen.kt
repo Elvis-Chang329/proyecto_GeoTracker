@@ -1,6 +1,7 @@
 package com.example.geotracker.ui.mapa
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -87,12 +88,21 @@ fun MapaInteractivoScreen(
         ) {
             Text(
                 text = "Mapa de Ubicaciones",
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.weight(1f)
             )
-            TextButton(onClick = onVolverClick) {
-                Text("Volver")
+            OutlinedButton(
+                onClick = onVolverClick,
+                shape = RoundedCornerShape(10.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
+            ) {
+                Text(
+                    text = "Volver",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp
+                )
             }
         }
 

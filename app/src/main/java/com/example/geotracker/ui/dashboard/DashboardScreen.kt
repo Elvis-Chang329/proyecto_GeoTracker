@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -35,7 +36,8 @@ fun DashboardScreen(
                 text = "¡Bienvenido a GeoTracker!",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center
             )
 
             if (userName.isNotBlank()) {
@@ -43,7 +45,8 @@ fun DashboardScreen(
                 Text(
                     text = "Usuario: $userName",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
                 )
             }
 
@@ -83,9 +86,10 @@ fun DashboardScreen(
                         )
                     ) {
                         Text(
-                            text = "📍 Capturar Ubicación GPS",
+                            text = "Capturar Ubicación GPS",
                             fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1
                         )
                     }
 
@@ -99,9 +103,10 @@ fun DashboardScreen(
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
-                            text = "📋 Listado de Ubicaciones",
+                            text = "Listado de Ubicaciones",
                             fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1
                         )
                     }
 
@@ -115,9 +120,10 @@ fun DashboardScreen(
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
-                            text = "🗺️ Mapa Interactivo GPS",
+                            text = "Mapa Interactivo GPS",
                             fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1
                         )
                     }
                 }
