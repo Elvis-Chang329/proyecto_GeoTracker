@@ -3,6 +3,7 @@ package com.example.geotracker.ui.Login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.geotracker.data.AuthRepository
+import com.example.geotracker.data.remote.RetrofitClient
 import com.example.geotracker.model.LoginState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,7 +41,11 @@ class LoginViewModel : ViewModel() {
 
             resultado.onSuccess { response ->
                 val user = response.data ?: response.user ?: response.body.user
-                val tokenStr = response.token ?: response.body.token ?: ""
+                val tokenStr = response.token ?: response.data?.token ?: response.user?.token ?: response.body.token ?: ""
+
+                if (tokenStr.isNotBlank()) {
+                    RetrofitClient.authToken = tokenStr
+                }
 
                 val userIdClean = when (val rawId = user.id) {
                     is Double -> rawId.toInt().toString()
@@ -50,20 +55,19 @@ class LoginViewModel : ViewModel() {
                     else -> rawId?.toString()?.substringBefore(".") ?: ""
                 }
 
+                val safeNombre = user.nombre ?: user.usuario ?: currentEmail
+                val safeApellido = user.apellido ?: ""
+                val safeUsuario = user.usuario ?: currentEmail
+
                 _state.value = _state.value.copy(
                     cargando = false,
                     loginExito = true,
                     userId = userIdClean,
                     email = user.email ?: currentEmail,
                     token = tokenStr,
-                    nombre = user.nombre ?: "",
-                    apellido = user.apellido ?: "",
-                    usuario = user.usuario ?: currentEmail,
-                    edad = user.edad?.toString() ?: "",
-                    fechaNacimiento = user.fechaNacimiento ?: "",
-                    telefono = user.telefono ?: "",
-                    foto = user.foto ?: "",
-                    rol = user.rol ?: "censista",
+                    nombre = safeNombre,
+                    apellido = safeApellido,
+                    usuario = safeUsuario,
                     mensaje = response.message.ifBlank { "¡Login exitoso!" }
                 )
             }.onFailure { error ->
@@ -72,7 +76,7 @@ class LoginViewModel : ViewModel() {
                     val json = JSONObject(rawError)
                     json.optString("message", rawError)
                 } catch (e: Exception) {
-                    rawError.ifBlank { "Error al iniciar sesión" }
+                    rawError.ifBlank { "Error al conectar o iniciar sesión" }
                 }
                 _state.value = _state.value.copy(
                     cargando = false,
